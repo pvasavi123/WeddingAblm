@@ -57,25 +57,38 @@
   </aside>
 
   <!-- Navigation Bar -->
-  <header class="luxury-header">
+  <header class="luxury-header" id="luxuryHeader">
     <nav class="nav-container">
       <a href="#hero" class="brand-monogram">
         <span class="initials">J & A</span>
         <span class="date-tag">Our Living Heirloom</span>
       </a>
-      <ul class="nav-menu">
-        <li><a href="#hero" class="nav-link active">Prologue</a></li>
-        <li><a href="#filmSection" class="nav-link">The Film</a></li>
-        <li><a href="#vaultSection" class="nav-link">Memory Vault</a></li>
-        <li><a href="#albumSection" class="nav-link">3D Album</a></li>
-        <li><a href="#loveStory" class="nav-link">Our Story</a></li>
-        <li><a href="#gallery" class="nav-link">Gallery</a></li>
-        <li><a href="#capsules" class="nav-link">Time Capsules</a></li>
-        <li><a href="#wishes" class="nav-link">Guestbook</a></li>
-      </ul>
-      <button class="rsvp-nav-btn open-add-memory-btn">+ Store Memory</button>
+      <div class="nav-menu-wrapper" id="navMenuWrapper">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#hero" class="nav-link active">Prologue</a></li>
+          <li><a href="#filmSection" class="nav-link">The Film</a></li>
+          <li><a href="#vaultSection" class="nav-link">Memory Vault</a></li>
+          <li><a href="#albumSection" class="nav-link">3D Album</a></li>
+          <li><a href="#loveStory" class="nav-link">Our Story</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#capsules" class="nav-link">Time Capsules</a></li>
+          <li><a href="#wishes" class="nav-link">Guestbook</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <button class="rsvp-nav-btn open-add-memory-btn">+ Store Memory</button>
+        </div>
+      </div>
+      <div class="nav-right-actions">
+        <button class="rsvp-nav-btn open-add-memory-btn desktop-only">+ Store Memory</button>
+        <button id="mobileMenuToggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
     </nav>
   </header>
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
 
   <main>
     <!-- SECTION 1: CINEMATIC HERO (PROLOGUE) -->

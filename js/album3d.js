@@ -132,6 +132,7 @@ class WeddingAlbum3D {
         if (spread) {
           if (idx === this.currentSpread - 1) {
             spread.classList.add('active');
+            spread.scrollTop = 0;
           } else {
             spread.classList.remove('active');
           }
@@ -149,6 +150,7 @@ class WeddingAlbum3D {
     if (!this.perspectiveWrapper) return;
 
     this.perspectiveWrapper.addEventListener('mousemove', (e) => {
+      if (window.innerWidth < 768 || window.matchMedia('(hover: none)').matches) return;
       const rect = this.perspectiveWrapper.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;

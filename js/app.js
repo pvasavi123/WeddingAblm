@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRSVPForm();
   initLightbox();
   initHUDControls();
+  initMobileMenu();
 });
 
 /* ==========================================================================
@@ -116,6 +117,7 @@ function initPerspectiveTabs() {
    3. 3D GYROSCOPIC TILT FOR GALLERY & CHAPTER CARDS
    ========================================================================== */
 function init3DCardTilt() {
+  if (window.matchMedia('(hover: none)').matches) return;
   const cards = document.querySelectorAll('.gallery-item-3d, .glass-3d-card');
 
   cards.forEach(card => {
@@ -508,5 +510,80 @@ function initHUDControls() {
         link.classList.add('active');
       }
     });
+  });
+}
+
+/* ==========================================================================
+   10. RESPONSIVE MOBILE NAVIGATION DRAWER
+   ========================================================================== */
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const navWrapper = document.getElementById('navMenuWrapper');
+  const backdrop = document.getElementById('mobileNavBackdrop');
+  const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+  const header = document.getElementById('luxuryHeader');
+
+  if (!toggleBtn || !navWrapper) return;
+
+  function openMenu() {
+    toggleBtn.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    navWrapper.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    document.body.classList.add('mobile-menu-locked');
+  }
+
+  function closeMenu() {
+    toggleBtn.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    navWrapper.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.classList.remove('mobile-menu-locked');
+  }
+
+  function toggleMenu() {
+    if (navWrapper.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMenu);
+  }
+
+  // Close when clicking any nav link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Close when clicking modal trigger button inside mobile drawer
+  const mobileActionBtns = navWrapper.querySelectorAll('.open-add-memory-btn');
+  mobileActionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navWrapper.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // Close on screen resize to desktop (> 768px)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navWrapper.classList.contains('open')) {
+      closeMenu();
+    }
   });
 }
